@@ -73,7 +73,7 @@ Speech → Whisper STT → M2M100 Translation → Piper TTS → Speech Output �
 
 ---
 
-## 🔧 Technical Changes
+<!-- ## 🔧 Technical Changes
 
 ### Backend (`main.py`)
 
@@ -181,7 +181,7 @@ VOICE_MODELS = {
 }
 ```
 
----
+--- -->
 
 ## 🔒 Security & Privacy
 
