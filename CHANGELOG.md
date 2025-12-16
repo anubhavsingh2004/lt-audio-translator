@@ -49,12 +49,6 @@ Speech → Whisper STT → M2M100 Translation → Piper TTS → Speech Output �
 - **Comprehensive logging** for debugging
 - **Voice model mapping** by language
 
-### 4. Documentation Overhaul ✅
-- **README.md** - Complete rewrite with Piper TTS
-- **SETUP_GUIDE.md** - Step-by-step installation guide
-- **USAGE_GUIDE.md** - Detailed usage examples and tips
-- **test_piper.py** - Verification script for Piper setup
-
 ### 5. Convenience Scripts ✅
 - **start.ps1** - PowerShell quick-start script
 - **start.bat** - Windows Batch quick-start script
@@ -73,9 +67,7 @@ Speech → Whisper STT → M2M100 Translation → Piper TTS → Speech Output �
 ### New Files:
 | File | Purpose |
 |:-----|:--------|
-| `SETUP_GUIDE.md` | Quick setup instructions (5-minute guide) |
-| `USAGE_GUIDE.md` | Detailed usage examples and scenarios |
-| `backend/test_piper.py` | Piper TTS verification script |
+
 | `start.ps1` | PowerShell launcher for both backend/frontend |
 | `start.bat` | Batch file launcher (alternative to .ps1) |
 
@@ -191,24 +183,6 @@ VOICE_MODELS = {
 
 ---
 
-## 🚀 Performance Improvements
-
-### Processing Pipeline:
-```
-Before (v1.0):  Speech → 5-10s (STT) → 1-2s (Translation) → Text
-After (v2.0):   Speech → 5-10s (STT) → 1-2s (Translation) → 1-3s (TTS) → Speech
-```
-
-**Total Time:** 7-15 seconds (CPU) | 4-8 seconds (GPU)
-
-### Audio Quality:
-- **Sample Rate:** 22,050 Hz (Piper default)
-- **Format:** WAV (uncompressed)
-- **Channels:** Mono
-- **Quality:** High (neural TTS, not robotic)
-
----
-
 ## 🔒 Security & Privacy
 
 ### Maintained 100% Offline Operation:
@@ -265,99 +239,6 @@ After (v2.0):   Speech → 5-10s (STT) → 1-2s (Translation) → 1-3s (TTS) →
 
 ---
 
-## 🧪 Testing
-
-### Verified Components:
-- ✅ Piper binary auto-download
-- ✅ Voice model downloads
-- ✅ TTS generation (all 5 languages)
-- ✅ Audio encoding (base64)
-- ✅ Frontend audio playback
-- ✅ Auto-play functionality
-- ✅ Manual replay button
-- ✅ Copy to clipboard
-
-### Test Script Added:
-```bash
-python backend/test_piper.py
-```
-Verifies:
-- Piper binary exists
-- Voice models installed
-- espeak-ng data present
-- TTS generation works
-
----
-
-## 📝 Documentation Updates
-
-### README.md Changes:
-- ✅ Updated title to "Complete offline speech-to-speech"
-- ✅ Added Piper to tech stack table
-- ✅ Updated pipeline diagram with TTS
-- ✅ Added supported languages table with voice models
-- ✅ Complete API reference
-- ✅ Troubleshooting section (TTS-specific)
-- ✅ Performance benchmarks
-- ✅ System requirements (updated for TTS)
-- ✅ Advanced configuration options
-
-### New Documentation:
-1. **SETUP_GUIDE.md**
-   - 5-minute quick start
-   - Prerequisites
-   - Step-by-step backend setup
-   - Step-by-step frontend setup
-   - Troubleshooting common issues
-   - Download size estimates
-
-2. **USAGE_GUIDE.md**
-   - Basic workflow
-   - Language examples
-   - Use case scenarios
-   - UI features explained
-   - Audio playback options
-   - Testing phrases
-   - Performance expectations
-   - Pro tips
-   - Best practices
-
----
-
-## 🎯 Migration Guide (v1.0 → v2.0)
-
-### For Existing Users:
-
-1. **Pull latest changes:**
-   ```bash
-   git pull
-   ```
-
-2. **Re-run download script:**
-   ```bash
-   cd backend
-   .\venv\Scripts\Activate.ps1
-   python download_models.py
-   ```
-   This will download Piper binary and voice models.
-
-3. **No code changes needed:**
-   - Backend automatically detects Piper
-   - Frontend automatically handles audio
-
-4. **Test setup:**
-   ```bash
-   python test_piper.py
-   ```
-
-5. **Restart servers:**
-   ```bash
-   # Use new quick-start script
-   .\start.ps1
-   ```
-
----
-
 ## 🔮 Future Enhancements (Not in This Release)
 
 ### Planned for v3.0:
@@ -371,38 +252,3 @@ Verifies:
 - [ ] Voice selection per language (multiple voices)
 
 ---
-
-## 🤝 Contributors
-
-- **Piper TTS Integration:** GitHub Copilot
-- **Documentation:** GitHub Copilot
-- **Testing:** GitHub Copilot
-
----
-
-## 📞 Support
-
-### Resources:
-- 📖 [README.md](README.md) - Full project documentation
-- 🚀 [SETUP_GUIDE.md](SETUP_GUIDE.md) - Installation guide
-- 🎬 [USAGE_GUIDE.md](USAGE_GUIDE.md) - Usage examples
-
-### Troubleshooting:
-1. Check SETUP_GUIDE.md troubleshooting section
-2. Run `python test_piper.py` to verify TTS
-3. Check backend logs for errors
-4. Open GitHub issue if problem persists
-
----
-
-## 📄 License
-
-This project remains under the **MIT License**.
-
-All third-party components (Whisper, M2M100, Piper) are also MIT licensed.
-
----
-
-**✅ Version 2.0 Complete - Full Speech-to-Speech Pipeline Operational!**
-
-🔒 **100% Offline** | 🚀 **Production Ready** | 🌍 **5 Languages Supported**
