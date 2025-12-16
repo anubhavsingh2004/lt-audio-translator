@@ -6,14 +6,13 @@ import torch
 import tempfile
 import os
 import logging
-
+import subprocess
+import base64
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-
-app = FastAPI(title="L&T Audio Translator (No TTS)")
-
+app = FastAPI(title="L&T Audio Translator with Piper TTS")
 
 app.add_middleware(
     CORSMiddleware,
@@ -23,13 +22,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 class ModelManager:
     def __init__(self):
         self.whisper_model = None
         self.m2m_model = None
         self.m2m_tokenizer = None
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        
+        # Piper paths
+        self.piper_dir = os.path.join(os.path.dirname(__file__), "piper")
+        self.piper_exe = os.path.join(self.piper_dir, "piper.exe")
+        self.voices_dir = os.path.join(self.piper_dir, "voices")
+        self.piper_voices = {}
+        
         logger.info(f"🔧 Using device: {self.device}")
     
     def load_models(self):
@@ -40,11 +45,123 @@ class ModelManager:
         self.m2m_tokenizer = M2M100Tokenizer.from_pretrained("facebook/m2m100_418M")
         self.m2m_model = M2M100ForConditionalGeneration.from_pretrained("facebook/m2m100_418M").to(self.device)
         
-        logger.info("✅ Models loaded (TTS disabled)")
-
+        logger.info("📥 Loading Piper TTS...")
+        self._load_piper_voices()
+        
+        logger.info("✅ All models loaded successfully!")
+    
+    def _load_piper_voices(self):
+        """Map voice files for each language"""
+        if not os.path.exists(self.piper_exe):
+            logger.error(f"❌ Piper binary not found at: {self.piper_exe}")
+            logger.error("   Run: python download_models.py")
+            return
+        
+        voice_mapping = {
+            "english": "en_US-lessac-medium.onnx",
+            "hindi": "hi_IN-pratham-medium.onnx",  # Hindi voice (Pratham speaker)
+            "french": "fr_FR-siwis-medium.onnx",
+            "spanish": "es_ES-davefx-medium.onnx",
+            "german": "de_DE-thorsten-medium.onnx"
+        }
+        
+        for lang, filename in voice_mapping.items():
+            voice_path = os.path.join(self.voices_dir, filename)
+            if os.path.exists(voice_path):
+                self.piper_voices[lang] = voice_path
+                logger.info(f"  ✅ {lang.capitalize()} voice loaded")
+            else:
+                logger.warning(f"  ⚠️  {lang.capitalize()} voice not found")
+        
+        if not self.piper_voices:
+            logger.error("❌ No Piper voices found! Run download_models.py")
+    
+    def generate_speech(self, text, language):
+        """Generate speech using Piper binary"""
+        voice_path = self.piper_voices.get(language.lower())
+        
+        if not voice_path:
+            logger.warning(f"Voice for {language} not available, using English")
+            voice_path = self.piper_voices.get("english")
+        
+        if not voice_path:
+            raise Exception("No TTS voices available")
+        
+        # Create temp output file
+        with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as temp_output:
+            output_path = temp_output.name
+        
+        try:
+            # Path to espeak-ng data
+            espeak_data_path = os.path.join(self.piper_dir, "piper", "espeak-ng-data")
+            
+            # Command to run Piper
+            cmd = [
+                self.piper_exe,
+                "--model", voice_path,
+                "--output_file", output_path,
+                "--espeak_data", espeak_data_path
+            ]
+            
+            logger.info(f"🔊 TTS Command: {' '.join(cmd)}")
+            logger.info(f"📝 Text to speak: {text}")
+            
+            # Run Piper and pipe text via stdin
+            process = subprocess.Popen(
+                cmd,
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                cwd=self.piper_dir,  # Important: run in piper directory
+                shell=False
+            )
+            
+            # Send text via stdin (Piper expects UTF-8)
+            stdout, stderr = process.communicate(input=text.encode('utf-8'), timeout=30)
+            
+            # Log output for debugging
+            if stdout:
+                logger.info(f"Piper stdout: {stdout.decode('utf-8', errors='ignore').strip()}")
+            if stderr:
+                stderr_text = stderr.decode('utf-8', errors='ignore').strip()
+                if stderr_text:
+                    logger.info(f"Piper stderr: {stderr_text}")
+            
+            # Check return code
+            if process.returncode != 0:
+                raise Exception(f"Piper failed with exit code {process.returncode}")
+            
+            # Verify output file exists and has content
+            if not os.path.exists(output_path):
+                raise Exception(f"Output file not created: {output_path}")
+            
+            file_size = os.path.getsize(output_path)
+            if file_size == 0:
+                raise Exception("Generated audio file is empty")
+            
+            # Read the generated audio
+            with open(output_path, "rb") as f:
+                audio_data = f.read()
+            
+            logger.info(f"✅ Generated {len(audio_data)} bytes ({file_size/1024:.1f} KB) of audio")
+            return audio_data
+            
+        except subprocess.TimeoutExpired:
+            process.kill()
+            raise Exception("TTS generation timed out (>30s)")
+        except Exception as e:
+            logger.error(f"❌ TTS generation failed: {str(e)}")
+            raise
+        finally:
+            # Cleanup temp file
+            if os.path.exists(output_path):
+                try:
+                    os.unlink(output_path)
+                    logger.info("🗑️ Cleaned up temp audio file")
+                except Exception as e:
+                    logger.warning(f"⚠️ Could not delete temp file: {e}")
 
 model_manager = ModelManager()
-
 
 LANG_MAP = {
     "english": "en", "hindi": "hi", "french": "fr", 
@@ -52,25 +169,24 @@ LANG_MAP = {
     "russian": "ru", "chinese": "zh"
 }
 
-
 @app.on_event("startup")
 async def startup():
     model_manager.load_models()
-
 
 @app.get("/")
 async def root():
     return {
         "service": "L&T Audio Translator",
         "status": "🔒 100% Offline",
-        "mode": "STT + Translation (TTS disabled)",
+        "mode": "STT + Translation + TTS",
         "models": {
             "stt": "Whisper ✅",
             "translation": "M2M100 ✅",
-            "tts": "Disabled ⚠️ (Install Visual C++ Build Tools + TTS later)"
-        }
+            "tts": f"Piper ✅ ({len(model_manager.piper_voices)} voices)",
+            "piper_binary": os.path.exists(model_manager.piper_exe)
+        },
+        "available_voices": list(model_manager.piper_voices.keys())
     }
-
 
 @app.post("/api/translate-audio")
 async def translate_audio(
@@ -78,67 +194,54 @@ async def translate_audio(
     source_lang: str = Form(...),
     target_lang: str = Form(...)
 ):
-    """
-    Pipeline: Audio → STT → Translation (No TTS output)
-    """
+    """Full Pipeline: Audio → STT → Translation → TTS"""
     temp_input_path = None
     
     try:
-        # Create temp file and get path
+        # Save uploaded audio
         temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".wav", mode='wb')
         temp_input_path = temp_file.name
-        
-        # Write audio content
         content = await audio.read()
         temp_file.write(content)
-        temp_file.close()  # IMPORTANT: Close before Whisper reads it
+        temp_file.close()
         
         logger.info(f"🎤 Processing: {source_lang} → {target_lang}")
-        logger.info(f"📁 Temp file: {temp_input_path}")
-        
-        # Verify file exists and has content
-        if not os.path.exists(temp_input_path):
-            raise HTTPException(status_code=500, detail="Failed to save audio file")
-        
-        file_size = os.path.getsize(temp_input_path)
-        logger.info(f"📊 Audio file size: {file_size} bytes")
-        
-        if file_size == 0:
-            raise HTTPException(status_code=400, detail="Received empty audio file")
         
         # Step 1: STT
-        logger.info("Step 1/2: Transcribing with Whisper...")
+        logger.info("Step 1/3: Transcribing with Whisper...")
         src_code = LANG_MAP.get(source_lang.lower(), "en")
-        
         result = model_manager.whisper_model.transcribe(
-            temp_input_path,
-            language=src_code,
-            task="transcribe",
-            fp16=False  # Force CPU compatibility
+            temp_input_path, language=src_code, task="transcribe", fp16=False
         )
         transcribed = result["text"].strip()
         logger.info(f"📝 Transcribed: {transcribed}")
         
         if not transcribed:
-            raise HTTPException(status_code=400, detail="No speech detected in audio")
+            raise HTTPException(status_code=400, detail="No speech detected")
         
         # Step 2: Translation
-        logger.info("Step 2/2: Translating with M2M100...")
+        logger.info("Step 2/3: Translating with M2M100...")
         tgt_code = LANG_MAP.get(target_lang.lower(), "fr")
-        
         model_manager.m2m_tokenizer.src_lang = src_code
         encoded = model_manager.m2m_tokenizer(transcribed, return_tensors="pt").to(model_manager.device)
-        
         generated = model_manager.m2m_model.generate(
             **encoded,
             forced_bos_token_id=model_manager.m2m_tokenizer.get_lang_id(tgt_code),
-            max_length=512
+            max_new_tokens=200,  # Limit output length
+            num_beams=5,  # Better beam search
+            repetition_penalty=2.0,  # Strongly discourage repetition
+            no_repeat_ngram_size=3,  # Prevent 3-word repetitions
+            early_stopping=True  # Stop when done
         )
-        
         translated = model_manager.m2m_tokenizer.batch_decode(generated, skip_special_tokens=True)[0]
         logger.info(f"🌍 Translated: {translated}")
         
-        logger.info("✅ Translation complete!")
+        # Step 3: TTS
+        logger.info("Step 3/3: Generating speech with Piper...")
+        audio_data = model_manager.generate_speech(translated, target_lang)
+        audio_base64 = base64.b64encode(audio_data).decode('utf-8')
+        
+        logger.info("✅ Full pipeline complete!")
         
         return {
             "success": True,
@@ -146,26 +249,23 @@ async def translate_audio(
             "translated_text": translated,
             "source_language": source_lang,
             "target_language": target_lang,
-            "audio_file": None,  # TTS disabled
-            "note": "Speech output disabled. Install TTS to enable audio output."
+            "audio_file": audio_base64,
+            "audio_format": "wav"
         }
     
     except HTTPException:
-        raise  # Re-raise HTTP exceptions as-is
+        raise
     except Exception as e:
         logger.error(f"❌ Error: {str(e)}")
         import traceback
         logger.error(traceback.format_exc())
         raise HTTPException(status_code=500, detail=f"Processing error: {str(e)}")
     finally:
-        # Cleanup temp file
         if temp_input_path and os.path.exists(temp_input_path):
             try:
                 os.unlink(temp_input_path)
-                logger.info("🗑️ Temp file cleaned up")
-            except Exception as e:
-                logger.warning(f"⚠️ Failed to delete temp file: {e}")
-
+            except:
+                pass
 
 @app.get("/api/languages")
 async def languages():
@@ -175,48 +275,9 @@ async def languages():
             {"code": "hindi", "name": "Hindi"},
             {"code": "french", "name": "French"},
             {"code": "spanish", "name": "Spanish"},
-            {"code": "german", "name": "German"},
-            {"code": "arabic", "name": "Arabic"},
-            {"code": "russian", "name": "Russian"},
-            {"code": "chinese", "name": "Chinese"}
+            {"code": "german", "name": "German"}
         ]
     }
-
-
-@app.post("/api/transcribe-only")
-async def transcribe_only(
-    audio: UploadFile = File(...),
-    language: str = Form(...)
-):
-    """STT only endpoint"""
-    temp_file_path = None
-    
-    try:
-        # Create and write temp file properly
-        temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".wav", mode='wb')
-        temp_file_path = temp_file.name
-        
-        content = await audio.read()
-        temp_file.write(content)
-        temp_file.close()
-        
-        result = model_manager.whisper_model.transcribe(
-            temp_file_path,
-            language=LANG_MAP.get(language.lower(), language),
-            fp16=False
-        )
-        
-        return {
-            "text": result["text"],
-            "language": language
-        }
-    finally:
-        if temp_file_path and os.path.exists(temp_file_path):
-            try:
-                os.unlink(temp_file_path)
-            except Exception as e:
-                logger.warning(f"Failed to delete temp file: {e}")
-
 
 if __name__ == "__main__":
     import uvicorn
