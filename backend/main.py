@@ -8,6 +8,7 @@ import os
 import logging
 import subprocess
 import base64
+from glossary import get_glossary
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -39,7 +40,10 @@ class ModelManager:
     
     def load_models(self):
         logger.info("📥 Loading Whisper STT...")
-        self.whisper_model = whisper.load_model("base", device=self.device)
+        # Use "medium" model for excellent multilingual support (Hindi, French, etc.)
+        # Options: tiny, base, small, medium, large
+        # medium = best balance for production Hindi transcription
+        self.whisper_model = whisper.load_model("medium", device=self.device)
         
         logger.info("📥 Loading M2M100 Translation...")
         self.m2m_tokenizer = M2M100Tokenizer.from_pretrained("facebook/m2m100_418M")
@@ -194,7 +198,11 @@ async def translate_audio(
     source_lang: str = Form(...),
     target_lang: str = Form(...)
 ):
-    """Full Pipeline: Audio → STT → Translation → TTS"""
+    """
+    Full Pipeline: Audio → STT → Translation (with ALWAYS-ON defense glossary) → TTS
+    
+    Defense glossary is ALWAYS enabled for military communication.
+    """
     temp_input_path = None
     
     try:
@@ -205,13 +213,21 @@ async def translate_audio(
         temp_file.write(content)
         temp_file.close()
         
-        logger.info(f"🎤 Processing: {source_lang} → {target_lang}")
+        logger.info(f"🎤 Processing [MILITARY MODE]: {source_lang} → {target_lang}")
         
         # Step 1: STT
         logger.info("Step 1/3: Transcribing with Whisper...")
         src_code = LANG_MAP.get(source_lang.lower(), "en")
+        
+        # Better transcription parameters for accuracy
         result = model_manager.whisper_model.transcribe(
-            temp_input_path, language=src_code, task="transcribe", fp16=False
+            temp_input_path, 
+            language=src_code, 
+            task="transcribe", 
+            fp16=False,
+            beam_size=5,  # Better accuracy with beam search
+            best_of=5,    # Consider multiple candidates
+            temperature=0.0  # Deterministic output
         )
         transcribed = result["text"].strip()
         logger.info(f"📝 Transcribed: {transcribed}")
@@ -219,21 +235,42 @@ async def translate_audio(
         if not transcribed:
             raise HTTPException(status_code=400, detail="No speech detected")
         
-        # Step 2: Translation
-        logger.info("Step 2/3: Translating with M2M100...")
+        # Step 2: Translation with ALWAYS-ON Defense Glossary
+        logger.info("Step 2/3: Translating with M2M100 + Defense Glossary...")
+        
+        # ALWAYS protect military/technical terms
+        glossary = get_glossary()
+        protected_text, placeholder_map = glossary.protect_terms(
+            transcribed,
+            target_lang
+        )
+        
+        if placeholder_map:
+            logger.info(f"🔒 Protected {len(placeholder_map)} military terms with placeholders")
+        
+        # Translate (possibly with placeholders)
         tgt_code = LANG_MAP.get(target_lang.lower(), "fr")
         model_manager.m2m_tokenizer.src_lang = src_code
-        encoded = model_manager.m2m_tokenizer(transcribed, return_tensors="pt").to(model_manager.device)
+        encoded = model_manager.m2m_tokenizer(protected_text, return_tensors="pt").to(model_manager.device)
+        
+        # Use conservative generation parameters for military context
         generated = model_manager.m2m_model.generate(
             **encoded,
             forced_bos_token_id=model_manager.m2m_tokenizer.get_lang_id(tgt_code),
-            max_new_tokens=200,  # Limit output length
-            num_beams=5,  # Better beam search
-            repetition_penalty=2.0,  # Strongly discourage repetition
-            no_repeat_ngram_size=3,  # Prevent 3-word repetitions
-            early_stopping=True  # Stop when done
+            max_new_tokens=256,
+            num_beams=4,
+            early_stopping=True,
+            no_repeat_ngram_size=3
         )
-        translated = model_manager.m2m_tokenizer.batch_decode(generated, skip_special_tokens=True)[0]
+
+        translated_raw = model_manager.m2m_tokenizer.batch_decode(generated, skip_special_tokens=True)[0]
+        
+        # Debug: Log the raw translation to see placeholder state
+        logger.info(f"🔍 Raw translation (before restore): {translated_raw}")
+        
+        # ALWAYS restore protected military terms
+        translated = glossary.restore_terms(translated_raw, placeholder_map)
+        
         logger.info(f"🌍 Translated: {translated}")
         
         # Step 3: TTS
@@ -277,6 +314,16 @@ async def languages():
             {"code": "spanish", "name": "Spanish"},
             {"code": "german", "name": "German"}
         ]
+    }
+
+@app.get("/api/glossary/stats")
+async def glossary_stats():
+    """Get defense glossary statistics (always-on system)"""
+    glossary = get_glossary()
+    stats = glossary.get_stats()
+    return {
+        "mode": "ALWAYS-ON (Military Communication)",
+        "glossary_stats": stats
     }
 
 if __name__ == "__main__":

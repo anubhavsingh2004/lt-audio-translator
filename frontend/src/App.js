@@ -166,7 +166,8 @@ function App() {
   return (
     <div className="App">
       <div className="main-container">
-        <h1 className="title">Live Audio Translator</h1>
+        <h1 className="title">🔒 Military Audio Translator</h1>
+        <p className="subtitle">Secure Offline Translation System</p>
 
         {/* Language Selector Bar */}
         <div className="language-bar">

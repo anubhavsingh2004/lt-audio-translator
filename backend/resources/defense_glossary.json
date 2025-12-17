@@ -1,0 +1,1381 @@
+{
+  "_metadata": {
+    "version": "1.0",
+    "description": "Tier-A curated defense glossary (high quality, no filler).",
+    "last_updated": "2025-12-18",
+    "count": 123
+  },
+  "entries": [
+    {
+      "id": "dg_nut",
+      "term": "nut",
+      "target_hi": "नट (बोल्ट फास्टनर)",
+      "variants": [
+        "fastener nut"
+      ],
+      "priority": 10,
+      "tags": [
+        "engineering"
+      ],
+      "notes": "Fastener sense, not food"
+    },
+    {
+      "id": "dg_bolt",
+      "term": "bolt",
+      "target_hi": "बोल्ट (फास्टनर)",
+      "variants": [
+        "bolt fastener"
+      ],
+      "priority": 10,
+      "tags": [
+        "engineering"
+      ]
+    },
+    {
+      "id": "dg_battery",
+      "term": "battery",
+      "target_hi": "बैटरी (तोपखाना इकाई)",
+      "variants": [
+        "artillery battery"
+      ],
+      "priority": 9,
+      "tags": [
+        "artillery"
+      ],
+      "notes": "Artillery unit sense"
+    },
+    {
+      "id": "dg_charge",
+      "term": "charge",
+      "target_hi": "विस्फोटक चार्ज",
+      "variants": [
+        "explosive charge"
+      ],
+      "priority": 9,
+      "tags": [
+        "eod",
+        "demolitions"
+      ]
+    },
+    {
+      "id": "dg_arm",
+      "term": "arm",
+      "target_hi": "आर्म करना / सशस्त्र करना",
+      "variants": [
+        "arm the device"
+      ],
+      "priority": 9,
+      "tags": [
+        "weapons",
+        "eod"
+      ]
+    },
+    {
+      "id": "dg_fire",
+      "term": "fire",
+      "target_hi": "फायर (गोली चलाना)",
+      "variants": [
+        "open fire"
+      ],
+      "priority": 9,
+      "tags": [
+        "tactics",
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_round",
+      "term": "round",
+      "target_hi": "राउंड (गोला-बारूद)",
+      "variants": [
+        "ammo round"
+      ],
+      "priority": 9,
+      "tags": [
+        "ammunition"
+      ]
+    },
+    {
+      "id": "dg_shell",
+      "term": "shell",
+      "target_hi": "गोला (तोप/मोर्टार)",
+      "variants": [
+        "artillery shell",
+        "mortar shell"
+      ],
+      "priority": 9,
+      "tags": [
+        "artillery",
+        "ammunition"
+      ]
+    },
+    {
+      "id": "dg_magazine",
+      "term": "magazine",
+      "target_hi": "मैगजीन (गोला-बारूद)",
+      "variants": [
+        "mag"
+      ],
+      "priority": 9,
+      "tags": [
+        "weapons",
+        "ammunition"
+      ],
+      "notes": "Ammo magazine, not publication"
+    },
+    {
+      "id": "dg_bearing",
+      "term": "bearing",
+      "target_hi": "दिशा कोण (बेयरिंग)",
+      "variants": [
+        "bearing angle"
+      ],
+      "priority": 8,
+      "tags": [
+        "navigation"
+      ]
+    },
+    {
+      "id": "dg_mine",
+      "term": "mine",
+      "target_hi": "बारूदी सुरंग",
+      "variants": [
+        "landmine"
+      ],
+      "priority": 9,
+      "tags": [
+        "eod",
+        "engineering"
+      ]
+    },
+    {
+      "id": "dg_range",
+      "term": "range",
+      "target_hi": "रेंज (दूरी/फायरिंग क्षेत्र)",
+      "variants": [
+        "firing range"
+      ],
+      "priority": 8,
+      "tags": [
+        "navigation",
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_secure",
+      "term": "secure",
+      "target_hi": "सुरक्षित करना / कब्ज़ा करना",
+      "variants": [
+        "secure the area"
+      ],
+      "priority": 8,
+      "tags": [
+        "tactics"
+      ]
+    },
+    {
+      "id": "dg_clear",
+      "term": "clear",
+      "target_hi": "क्लियर करना (क्षेत्र/कमरा)",
+      "variants": [
+        "clear the room"
+      ],
+      "priority": 8,
+      "tags": [
+        "cqb",
+        "tactics"
+      ]
+    },
+    {
+      "id": "dg_breach",
+      "term": "breach",
+      "target_hi": "ब्रीच (तोड़कर प्रवेश)",
+      "variants": [
+        "breach point"
+      ],
+      "priority": 8,
+      "tags": [
+        "cqb",
+        "tactics"
+      ]
+    },
+    {
+      "id": "dg_roger",
+      "term": "roger",
+      "target_hi": "समझ गया",
+      "variants": [
+        "roger that"
+      ],
+      "priority": 9,
+      "tags": [
+        "comms",
+        "radio"
+      ]
+    },
+    {
+      "id": "dg_wilco",
+      "term": "wilco",
+      "target_hi": "अवश्य करूंगा",
+      "variants": [],
+      "priority": 9,
+      "tags": [
+        "comms",
+        "radio"
+      ]
+    },
+    {
+      "id": "dg_affirmative",
+      "term": "affirmative",
+      "target_hi": "हां",
+      "variants": [
+        "affirm"
+      ],
+      "priority": 8,
+      "tags": [
+        "comms",
+        "radio"
+      ]
+    },
+    {
+      "id": "dg_negative",
+      "term": "negative",
+      "target_hi": "नहीं",
+      "variants": [
+        "neg"
+      ],
+      "priority": 8,
+      "tags": [
+        "comms",
+        "radio"
+      ]
+    },
+    {
+      "id": "dg_copy",
+      "term": "copy",
+      "target_hi": "समझ गया",
+      "variants": [
+        "copy that"
+      ],
+      "priority": 8,
+      "tags": [
+        "comms",
+        "radio"
+      ]
+    },
+    {
+      "id": "dg_stand_by",
+      "term": "stand by",
+      "target_hi": "प्रतीक्षा करें",
+      "variants": [
+        "standby"
+      ],
+      "priority": 8,
+      "tags": [
+        "comms",
+        "radio"
+      ]
+    },
+    {
+      "id": "dg_go_ahead",
+      "term": "go ahead",
+      "target_hi": "बोलिए",
+      "variants": [],
+      "priority": 8,
+      "tags": [
+        "comms",
+        "radio"
+      ]
+    },
+    {
+      "id": "dg_say_again",
+      "term": "say again",
+      "target_hi": "दोहराएं",
+      "variants": [],
+      "priority": 8,
+      "tags": [
+        "comms",
+        "radio"
+      ]
+    },
+    {
+      "id": "dg_break",
+      "term": "break",
+      "target_hi": "ब्रेक / विराम",
+      "variants": [],
+      "priority": 8,
+      "tags": [
+        "comms",
+        "radio"
+      ]
+    },
+    {
+      "id": "dg_over",
+      "term": "over",
+      "target_hi": "ओवर (समाप्त)",
+      "variants": [],
+      "priority": 8,
+      "tags": [
+        "comms",
+        "radio"
+      ]
+    },
+    {
+      "id": "dg_out",
+      "term": "out",
+      "target_hi": "आउट (संदेश समाप्त)",
+      "variants": [],
+      "priority": 8,
+      "tags": [
+        "comms",
+        "radio"
+      ]
+    },
+    {
+      "id": "dg_repeat",
+      "term": "repeat",
+      "target_hi": "दोहराएं (रिपीट)",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "comms",
+        "radio"
+      ]
+    },
+    {
+      "id": "dg_loud_and_clear",
+      "term": "loud and clear",
+      "target_hi": "स्पष्ट सुनाई दे रहा है",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "comms",
+        "radio"
+      ]
+    },
+    {
+      "id": "dg_read_back",
+      "term": "read back",
+      "target_hi": "रीड बैक करें",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "comms",
+        "radio"
+      ]
+    },
+    {
+      "id": "dg_rules_of_engagement",
+      "term": "rules of engagement",
+      "target_hi": "युद्ध नियम (ROE)",
+      "variants": [
+        "ROE"
+      ],
+      "priority": 10,
+      "tags": [
+        "legal",
+        "operations"
+      ]
+    },
+    {
+      "id": "dg_cease_fire",
+      "term": "cease fire",
+      "target_hi": "गोलीबारी बंद करो",
+      "variants": [
+        "ceasefire"
+      ],
+      "priority": 9,
+      "tags": [
+        "comms",
+        "tactics"
+      ]
+    },
+    {
+      "id": "dg_check_fire",
+      "term": "check fire",
+      "target_hi": "फायर रोकें",
+      "variants": [],
+      "priority": 9,
+      "tags": [
+        "tactics",
+        "comms"
+      ]
+    },
+    {
+      "id": "dg_shift_fire",
+      "term": "shift fire",
+      "target_hi": "फायर शिफ्ट करो",
+      "variants": [],
+      "priority": 8,
+      "tags": [
+        "tactics"
+      ]
+    },
+    {
+      "id": "dg_hold_fire",
+      "term": "hold fire",
+      "target_hi": "फायर रोककर रखें",
+      "variants": [],
+      "priority": 8,
+      "tags": [
+        "tactics"
+      ]
+    },
+    {
+      "id": "dg_fire_mission",
+      "term": "fire mission",
+      "target_hi": "फायर मिशन",
+      "variants": [],
+      "priority": 8,
+      "tags": [
+        "artillery"
+      ]
+    },
+    {
+      "id": "dg_danger_close",
+      "term": "danger close",
+      "target_hi": "खतरे के बहुत करीब",
+      "variants": [],
+      "priority": 8,
+      "tags": [
+        "tactics"
+      ]
+    },
+    {
+      "id": "dg_covering_fire",
+      "term": "covering fire",
+      "target_hi": "कवर फायर",
+      "variants": [],
+      "priority": 8,
+      "tags": [
+        "tactics"
+      ]
+    },
+    {
+      "id": "dg_suppressive_fire",
+      "term": "suppressive fire",
+      "target_hi": "दमनकारी फायर",
+      "variants": [],
+      "priority": 8,
+      "tags": [
+        "tactics"
+      ]
+    },
+    {
+      "id": "dg_secure_perimeter",
+      "term": "secure perimeter",
+      "target_hi": "परिधि सुरक्षित करो",
+      "variants": [],
+      "priority": 8,
+      "tags": [
+        "tactics"
+      ]
+    },
+    {
+      "id": "dg_clear_the_room",
+      "term": "clear the room",
+      "target_hi": "कमरा क्लियर करो",
+      "variants": [],
+      "priority": 8,
+      "tags": [
+        "cqb"
+      ]
+    },
+    {
+      "id": "dg_entry_point",
+      "term": "entry point",
+      "target_hi": "प्रवेश बिंदु",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "cqb"
+      ]
+    },
+    {
+      "id": "dg_breach_point",
+      "term": "breach point",
+      "target_hi": "ब्रीच पॉइंट",
+      "variants": [],
+      "priority": 8,
+      "tags": [
+        "cqb"
+      ]
+    },
+    {
+      "id": "dg_rally_point",
+      "term": "rally point",
+      "target_hi": "एकत्रीकरण बिंदु",
+      "variants": [
+        "RP"
+      ],
+      "priority": 7,
+      "tags": [
+        "tactics"
+      ]
+    },
+    {
+      "id": "dg_return_to_base",
+      "term": "return to base",
+      "target_hi": "आधार पर वापसी (RTB)",
+      "variants": [
+        "RTB"
+      ],
+      "priority": 8,
+      "tags": [
+        "aviation",
+        "comms"
+      ]
+    },
+    {
+      "id": "dg_situation_report",
+      "term": "situation report",
+      "target_hi": "स्थिति रिपोर्ट (SITREP)",
+      "variants": [
+        "SITREP"
+      ],
+      "priority": 8,
+      "tags": [
+        "comms"
+      ]
+    },
+    {
+      "id": "dg_quick_reaction_force",
+      "term": "quick reaction force",
+      "target_hi": "त्वरित प्रतिक्रिया बल (QRF)",
+      "variants": [
+        "QRF"
+      ],
+      "priority": 8,
+      "tags": [
+        "tactics"
+      ]
+    },
+    {
+      "id": "dg_improvised_explosive_device",
+      "term": "improvised explosive device",
+      "target_hi": "स्वनिर्मित विस्फोटक (IED)",
+      "variants": [
+        "IED"
+      ],
+      "priority": 10,
+      "tags": [
+        "eod"
+      ]
+    },
+    {
+      "id": "dg_ied",
+      "term": "IED",
+      "target_hi": "स्वनिर्मित विस्फोटक (IED)",
+      "variants": [
+        "improvised explosive device"
+      ],
+      "priority": 10,
+      "tags": [
+        "eod",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_roe",
+      "term": "ROE",
+      "target_hi": "युद्ध नियम (ROE)",
+      "variants": [
+        "rules of engagement"
+      ],
+      "priority": 10,
+      "tags": [
+        "legal",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_sitrep",
+      "term": "SITREP",
+      "target_hi": "स्थिति रिपोर्ट (SITREP)",
+      "variants": [
+        "situation report"
+      ],
+      "priority": 9,
+      "tags": [
+        "comms",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_rtb",
+      "term": "RTB",
+      "target_hi": "आधार पर वापसी (RTB)",
+      "variants": [
+        "return to base"
+      ],
+      "priority": 9,
+      "tags": [
+        "comms",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_qrf",
+      "term": "QRF",
+      "target_hi": "त्वरित प्रतिक्रिया बल (QRF)",
+      "variants": [
+        "quick reaction force"
+      ],
+      "priority": 9,
+      "tags": [
+        "tactics",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_medevac",
+      "term": "MEDEVAC",
+      "target_hi": "चिकित्सा स्थानांतरण (MEDEVAC)",
+      "variants": [],
+      "priority": 9,
+      "tags": [
+        "medical",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_casevac",
+      "term": "CASEVAC",
+      "target_hi": "चिकित्सा निकासी (CASEVAC)",
+      "variants": [],
+      "priority": 9,
+      "tags": [
+        "medical",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_kia",
+      "term": "KIA",
+      "target_hi": "युद्ध में मारा गया (KIA)",
+      "variants": [
+        "killed in action"
+      ],
+      "priority": 9,
+      "tags": [
+        "medical",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_wia",
+      "term": "WIA",
+      "target_hi": "घायल (WIA)",
+      "variants": [
+        "wounded in action"
+      ],
+      "priority": 9,
+      "tags": [
+        "medical",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_mia",
+      "term": "MIA",
+      "target_hi": "लापता (MIA)",
+      "variants": [
+        "missing in action"
+      ],
+      "priority": 9,
+      "tags": [
+        "operations",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_lz",
+      "term": "LZ",
+      "target_hi": "उतरान क्षेत्र (LZ)",
+      "variants": [
+        "landing zone"
+      ],
+      "priority": 8,
+      "tags": [
+        "aviation",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_dz",
+      "term": "DZ",
+      "target_hi": "ड्रॉप ज़ोन (DZ)",
+      "variants": [
+        "drop zone"
+      ],
+      "priority": 8,
+      "tags": [
+        "aviation",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_hvt",
+      "term": "HVT",
+      "target_hi": "उच्च मूल्य लक्ष्य (HVT)",
+      "variants": [
+        "high value target"
+      ],
+      "priority": 9,
+      "tags": [
+        "intel",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_cas",
+      "term": "CAS",
+      "target_hi": "क्लोज़ एयर सपोर्ट (CAS)",
+      "variants": [
+        "close air support"
+      ],
+      "priority": 9,
+      "tags": [
+        "aviation",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_eod",
+      "term": "EOD",
+      "target_hi": "विस्फोटक निष्क्रियकरण (EOD)",
+      "variants": [
+        "explosive ordnance disposal"
+      ],
+      "priority": 9,
+      "tags": [
+        "eod",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_c2",
+      "term": "C2",
+      "target_hi": "कमांड एंड कंट्रोल (C2)",
+      "variants": [
+        "command and control"
+      ],
+      "priority": 8,
+      "tags": [
+        "c2",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_c4isr",
+      "term": "C4ISR",
+      "target_hi": "C4ISR",
+      "variants": [],
+      "priority": 8,
+      "tags": [
+        "c2",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_uav",
+      "term": "UAV",
+      "target_hi": "मानवरहित हवाई वाहन (UAV)",
+      "variants": [
+        "drone"
+      ],
+      "priority": 8,
+      "tags": [
+        "aviation",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_ew",
+      "term": "EW",
+      "target_hi": "इलेक्ट्रॉनिक वारफेयर (EW)",
+      "variants": [
+        "electronic warfare"
+      ],
+      "priority": 8,
+      "tags": [
+        "ew",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_isr",
+      "term": "ISR",
+      "target_hi": "इंटेलिजेंस/सर्विलांस/रिकॉन (ISR)",
+      "variants": [],
+      "priority": 8,
+      "tags": [
+        "intel",
+        "acronym"
+      ]
+    },
+    {
+      "id": "dg_assault_rifle",
+      "term": "assault rifle",
+      "target_hi": "असॉल्ट राइफल",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_sniper_rifle",
+      "term": "sniper rifle",
+      "target_hi": "स्नाइपर राइफल",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_machine_gun",
+      "term": "machine gun",
+      "target_hi": "मशीन गन",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_light_machine_gun",
+      "term": "light machine gun",
+      "target_hi": "लाइट मशीन गन",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_heavy_machine_gun",
+      "term": "heavy machine gun",
+      "target_hi": "हैवी मशीन गन",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_grenade_launcher",
+      "term": "grenade launcher",
+      "target_hi": "ग्रेनेड लॉन्चर",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_rocket_launcher",
+      "term": "rocket launcher",
+      "target_hi": "रॉकेट लॉन्चर",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_hand_grenade",
+      "term": "hand grenade",
+      "target_hi": "हैंड ग्रेनेड",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_smoke_grenade",
+      "term": "smoke grenade",
+      "target_hi": "स्मोक ग्रेनेड",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_fragmentation_grenade",
+      "term": "fragmentation grenade",
+      "target_hi": "विखंडन ग्रेनेड",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_body_armor",
+      "term": "body armor",
+      "target_hi": "बॉडी आर्मर",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_helmet",
+      "term": "helmet",
+      "target_hi": "हेलमेट",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_night_vision",
+      "term": "night vision",
+      "target_hi": "नाइट विज़न",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_thermal_imaging",
+      "term": "thermal imaging",
+      "target_hi": "थर्मल इमेजिंग",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_suppressor",
+      "term": "suppressor",
+      "target_hi": "सप्रेसर",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_scope",
+      "term": "scope",
+      "target_hi": "स्कोप",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_ammunition",
+      "term": "ammunition",
+      "target_hi": "गोला-बारूद",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_mortar",
+      "term": "mortar",
+      "target_hi": "मोर्टार",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_howitzer",
+      "term": "howitzer",
+      "target_hi": "होवित्ज़र",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_artillery",
+      "term": "artillery",
+      "target_hi": "तोपखाना",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_rifle",
+      "term": "rifle",
+      "target_hi": "राइफल",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_pistol",
+      "term": "pistol",
+      "target_hi": "पिस्तौल",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "weapons"
+      ]
+    },
+    {
+      "id": "dg_grid_reference",
+      "term": "grid reference",
+      "target_hi": "ग्रिड संदर्भ",
+      "variants": [
+        "grid ref"
+      ],
+      "priority": 7,
+      "tags": [
+        "navigation"
+      ]
+    },
+    {
+      "id": "dg_azimuth",
+      "term": "azimuth",
+      "target_hi": "एज़िमुथ / दिशा कोण",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "navigation"
+      ]
+    },
+    {
+      "id": "dg_compass_bearing",
+      "term": "compass bearing",
+      "target_hi": "कम्पास बेयरिंग",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "navigation"
+      ]
+    },
+    {
+      "id": "dg_waypoint",
+      "term": "waypoint",
+      "target_hi": "वेपॉइंट",
+      "variants": [],
+      "priority": 6,
+      "tags": [
+        "navigation"
+      ]
+    },
+    {
+      "id": "dg_line_of_sight",
+      "term": "line of sight",
+      "target_hi": "दृष्टि रेखा",
+      "variants": [
+        "LOS"
+      ],
+      "priority": 6,
+      "tags": [
+        "navigation"
+      ]
+    },
+    {
+      "id": "dg_general",
+      "term": "General",
+      "target_hi": "जनरल",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "rank"
+      ]
+    },
+    {
+      "id": "dg_lieutenant_general",
+      "term": "Lieutenant General",
+      "target_hi": "लेफ्टिनेंट जनरल",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "rank"
+      ]
+    },
+    {
+      "id": "dg_major_general",
+      "term": "Major General",
+      "target_hi": "मेजर जनरल",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "rank"
+      ]
+    },
+    {
+      "id": "dg_brigadier",
+      "term": "Brigadier",
+      "target_hi": "ब्रिगेडियर",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "rank"
+      ]
+    },
+    {
+      "id": "dg_colonel",
+      "term": "Colonel",
+      "target_hi": "कर्नल",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "rank"
+      ]
+    },
+    {
+      "id": "dg_lieutenant_colonel",
+      "term": "Lieutenant Colonel",
+      "target_hi": "लेफ्टिनेंट कर्नल",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "rank"
+      ]
+    },
+    {
+      "id": "dg_major",
+      "term": "Major",
+      "target_hi": "मेजर",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "rank"
+      ]
+    },
+    {
+      "id": "dg_captain",
+      "term": "Captain",
+      "target_hi": "कैप्टन",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "rank"
+      ]
+    },
+    {
+      "id": "dg_lieutenant",
+      "term": "Lieutenant",
+      "target_hi": "लेफ्टिनेंट",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "rank"
+      ]
+    },
+    {
+      "id": "dg_second_lieutenant",
+      "term": "Second Lieutenant",
+      "target_hi": "सेकंड लेफ्टिनेंट",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "rank"
+      ]
+    },
+    {
+      "id": "dg_subedar",
+      "term": "Subedar",
+      "target_hi": "सूबेदार",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "rank"
+      ]
+    },
+    {
+      "id": "dg_havildar",
+      "term": "Havildar",
+      "target_hi": "हवलदार",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "rank"
+      ]
+    },
+    {
+      "id": "dg_naik",
+      "term": "Naik",
+      "target_hi": "नायक",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "rank"
+      ]
+    },
+    {
+      "id": "dg_lance_naik",
+      "term": "Lance Naik",
+      "target_hi": "लांस नायक",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "rank"
+      ]
+    },
+    {
+      "id": "dg_sepoy",
+      "term": "Sepoy",
+      "target_hi": "सिपाही",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "rank"
+      ]
+    },
+    {
+      "id": "dg_hold_position",
+      "term": "hold position",
+      "target_hi": "स्थिति बनाए रखें",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "dg_take_cover",
+      "term": "take cover",
+      "target_hi": "आड़ लें",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "dg_provide_cover",
+      "term": "provide cover",
+      "target_hi": "कवर दें",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "dg_move_to_cover",
+      "term": "move to cover",
+      "target_hi": "कवर की ओर बढ़ें",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "dg_enemy_contact",
+      "term": "enemy contact",
+      "target_hi": "शत्रु संपर्क",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "dg_hostile_fire",
+      "term": "hostile fire",
+      "target_hi": "शत्रु की गोलीबारी",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "dg_friendly_forces",
+      "term": "friendly forces",
+      "target_hi": "मित्र बल",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "dg_collateral_damage",
+      "term": "collateral damage",
+      "target_hi": "अनुषंगिक क्षति",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "dg_search_and_rescue",
+      "term": "search and rescue",
+      "target_hi": "खोज और बचाव",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "dg_combat_air_patrol",
+      "term": "combat air patrol",
+      "target_hi": "लड़ाकू हवाई गश्त",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "dg_rules_of_engagement_apply",
+      "term": "rules of engagement apply",
+      "target_hi": "युद्ध नियम लागू हैं",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "dg_cleared_hot",
+      "term": "cleared hot",
+      "target_hi": "फायर की अनुमति है",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "dg_abort_mission",
+      "term": "abort mission",
+      "target_hi": "मिशन रद्द करो",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "operations"
+      ]
+    },
+    {
+      "id": "dg_mission_complete",
+      "term": "mission complete",
+      "target_hi": "मिशन पूर्ण",
+      "variants": [],
+      "priority": 7,
+      "tags": [
+        "operations"
+      ]
+    }
+  ]
+}
