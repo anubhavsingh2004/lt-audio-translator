@@ -1,4 +1,4 @@
-# 🚀 L&T Live Audio Translator
+# 🚀 Live Context Aware Audio Translator
 
 **Complete offline speech-to-speech translation system** designed for mission-critical / military-grade environments.
 
@@ -16,8 +16,15 @@ This system is built for security, reliability, and complete local execution:
 * **Secure & Private**
     * Suitable for sensitive / military contexts.
     * **No data leaves the device.**
+* **Context-Aware Military Glossary** 🆕
+    * ALWAYS-ON protection for military/defense terminology
+    * 50+ pre-configured military terms (ranks, weapons, radio codes)
+    * Placeholder-based term preservation during translation
+    * Prevents mistranslation of critical jargon (e.g., "battery" → artillery unit, not power cell)
+    * Expandable to 1000+ terms with included generator tools
 * **Robust Speech-to-Text (STT)**
     * Uses OpenAI **Whisper** (local model) for multilingual transcription.
+    * Supports Whisper small model for better Hindi/multilingual accuracy.
     * Handles noisy environments reasonably well.
 * **Multilingual Translation**
     * Uses Meta's **M2M100** for direct translation between languages (e.g., English ↔ Hindi, English ↔ French).
@@ -31,9 +38,21 @@ This system is built for security, reliability, and complete local execution:
     * Auto-play translated audio output.
     * Copy-to-clipboard functionality.
 
+
+---
+
+## 🖥️ Frontend Interface Preview
+
+![Live Context Aware Audio Translator UI](assets/frontend-ui.png)
+
+*Modern React-based UI with live microphone recording, language selection, and auto-play translated speech.*
+
+---
+
+
 ### Complete Pipeline
 
-$$\text{Speech} \rightarrow \text{Whisper STT} \rightarrow \text{M2M100 Translation} \rightarrow \text{Piper TTS} \rightarrow \text{Speech Output}$$
+$$\text{Speech} \rightarrow \text{Whisper STT} \rightarrow \text{Glossary Protection} \rightarrow \text{M2M100 Translation} \rightarrow \text{Term Restoration} \rightarrow \text{Piper TTS} \rightarrow \text{Speech Output}$$
 
 ---
 
@@ -181,8 +200,14 @@ Frontend will open automatically at `http://localhost:3000`
 lt-audio-translator/
 ├── backend/
 │   ├── main.py                    # FastAPI server with full pipeline
+│   ├── glossary.py                # Defense glossary module (NEW)
 │   ├── download_models.py         # Auto-download script for all models
 │   ├── requirements.txt           # Python dependencies
+│   ├── resources/                 # Glossary data (NEW)
+│   │   └── defense_glossary.json  # Military terminology database
+│   ├── tools/                     # Utility scripts (NEW)
+│   │   ├── generate_defense_glossary.py
+│   │   └── validate_defense_glossary.py
 │   └── piper/                     # Piper TTS (auto-generated)
 │       ├── piper.exe              # Piper binary (Windows)
 │       ├── piper/                 # espeak-ng data & libraries
@@ -208,16 +233,23 @@ lt-audio-translator/
 ### Backend Pipeline (main.py)
 
 1. **Model Loading** (on startup):
-   - Whisper base model → CUDA/CPU
+   - Whisper smallmodel → CUDA/CPU
    - M2M100 418M model → CUDA/CPU
    - Piper voices (ONNX) → mapped by language
 
 2. **Request Processing** (`/api/translate-audio`):
    ```
-   Audio Upload → STT (Whisper) → Translation (M2M100) → TTS (Piper) → Audio Response
+   Audio Upload → STT (Whisper) → Glossary Protection → Translation (M2M100) → Term Restoration → TTS (Piper) → Audio Response
    ```
 
-3. **Piper TTS Integration**:
+3. **Defense Glossary System** (NEW):
+   - Protects military terms before translation
+   - Replaces terms with robust placeholders (XGLOSSARYX####X)
+   - M2M100 translates text with placeholders intact
+   - Restores target-language terms after translation
+   - Handles 50+ military terms with priority-based matching
+
+4. **Piper TTS Integration**:
    - Uses subprocess to run `piper.exe`
    - Pipes text via stdin (UTF-8)
    - Outputs WAV file
@@ -235,7 +267,7 @@ lt-audio-translator/
 
 | Operation | Time (CPU) | Time (GPU) |
 | :--- | :---: | :---: |
-| Whisper STT (base) | ~5-10s | ~2-4s |
+| Whisper STT (smal) | ~5-10s | ~2-4s |
 | M2M100 Translation | ~1-2s | ~0.5s |
 | Piper TTS | ~1-3s | ~1-3s |
 | **Total Pipeline** | **~7-15s** | **~4-8s** |
@@ -310,7 +342,7 @@ lt-audio-translator/
 
 Edit [main.py](backend/main.py#L45):
 ```python
-self.whisper_model = whisper.load_model("base")  # Options: tiny, base, small, medium, large
+self.whisper_model = whisper.load_model("small") # Options: tiny, base, small, medium, large
 ```
 
 **Trade-offs:**

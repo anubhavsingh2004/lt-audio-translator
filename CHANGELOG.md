@@ -1,7 +1,91 @@
-# 📝 Changelog - Piper TTS Integration
+# 📝 Changelog
+
+## Version 2.0- Context-Aware Military Glossary
+
+**Date:** December 18, 2025  
+**Focus:** Military terminology protection and translation accuracy
+
+---
+
+### 🎯 New Features
+
+#### 1. ALWAYS-ON Defense Glossary System ✅
+- **Context-aware translation** for military/defense terminology
+- **Placeholder-based protection** preserves critical jargon during translation
+- **50+ pre-configured terms** covering:
+  - Military ranks (Major General, Colonel, Lieutenant, etc.)
+  - Radio communications (Roger, Wilco, Copy, Over, etc.)
+  - Equipment & weapons (Battery, Magazine, Round, Shell, etc.)
+  - Tactical terms (ROE, SITREP, CASEVAC, QRF, etc.)
+  - Contextual disambiguation ("battery" → artillery unit vs. power cell)
+- **Robust placeholder format** (XGLOSSARYX####X) resistant to translation model modifications
+- **Fuzzy restoration** with 5-level fallback pattern matching
+
+#### 2. Glossary Management Tools ✅
+- **Generator script** (`generate_defense_glossary.py`) - Create 1000+ term glossaries programmatically
+- **Validator script** (`validate_defense_glossary.py`) - Ensure glossary integrity and coverage
+- **Extensible architecture** - Easy to add new terms and language pairs
+
+#### 3. UI/UX Improvements ✅
+- **Military branding** - "Military Audio Translator" title
+- **Secure offline system** subtitle
+- Streamlined interface focused on military use case
+
+---
+
+### 📁 Files Added
+
+| File | Purpose |
+|:-----|:--------|
+| `backend/glossary.py` | Core glossary module with term protection/restoration |
+| `backend/resources/defense_glossary.json` | Military terminology database (50+ entries) |
+| `backend/tools/generate_defense_glossary.py` | Tool to generate large-scale glossaries |
+| `backend/tools/validate_defense_glossary.py` | Tool to validate glossary structure |
+
+### 📝 Files Modified
+
+| File | Changes |
+|:-----|:--------|
+| `backend/main.py` | Integrated glossary into translation pipeline with debug logging |
+| `frontend/src/App.js` | Updated UI for military context |
+| `frontend/src/App.css` | Refined styling for professional military interface |
+| `README.md` | Added glossary documentation and updated pipeline diagram |
+| `CHANGELOG.md` | This changelog entry |
+
+---
+
+### 🔧 Technical Implementation
+
+**Glossary Protection Flow:**
+```
+1. Input: "Major General, report to base"
+2. Protection: "XGLOSSARYX0001X, report to base"
+3. Translation: "XGLOSSARYX0001X, आधार पर रिपोर्ट करें"
+4. Restoration: "मेजर जनरल, आधार पर रिपोर्ट करें"
+```
+
+**Key Features:**
+- Priority-based matching (longer phrases first)
+- Word-boundary safe regex matching
+- Overlap detection (prevents double-matching)
+- Multi-variant support (term + aliases)
+- Case-insensitive restoration with fuzzy matching
+
+---
+
+### 🎯 Impact
+
+- **Improved accuracy** for military communications
+- **Prevented mistranslations** of critical terminology
+- **Maintained context** of domain-specific jargon
+- **Foundation** for future glossary expansion (1000+ terms)
+
+---
+
+## Version 1.1 Full Speech-to-Speech Pipeline
 
 **Date:** December 16, 2025  
-**Version:** 2.0 (Full Speech-to-Speech Pipeline)
+**Version:** 1.1 (Full Speech-to-Speech Pipeline)
 
 ---
 
@@ -14,7 +98,7 @@ This update completes the **full offline speech-to-speech translation pipeline**
 Speech → Whisper STT → M2M100 Translation → Text Output ❌
 ```
 
-### After (v2.0):
+### After (v1.1):
 ```
 Speech → Whisper STT → M2M100 Translation → Piper TTS → Speech Output ✅
 ```
