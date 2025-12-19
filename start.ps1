@@ -1,8 +1,8 @@
-# L&T Audio Translator - Quick Start Script for PowerShell
+#  Audio Translator - Quick Start Script for PowerShell
 # Full Offline Speech-to-Speech Translation
 
 Write-Host "================================================" -ForegroundColor Cyan
-Write-Host "L&T Live Audio Translator" -ForegroundColor Green
+Write-Host "Audio Translator" -ForegroundColor Green
 Write-Host "Full Offline Speech-to-Speech Translation" -ForegroundColor Yellow
 Write-Host "================================================" -ForegroundColor Cyan
 Write-Host ""

@@ -40,10 +40,10 @@ class ModelManager:
     
     def load_models(self):
         logger.info("📥 Loading Whisper STT...")
-        # Use "medium" model for excellent multilingual support (Hindi, French, etc.)
+        # Use "small" model for better multilingual support (Hindi, French, etc.)
         # Options: tiny, base, small, medium, large
-        # medium = best balance for production Hindi transcription
-        self.whisper_model = whisper.load_model("medium", device=self.device)
+        # small = good balance of speed & accuracy for Hindi
+        self.whisper_model = whisper.load_model("small", device=self.device)
         
         logger.info("📥 Loading M2M100 Translation...")
         self.m2m_tokenizer = M2M100Tokenizer.from_pretrained("facebook/m2m100_418M")
@@ -218,16 +218,8 @@ async def translate_audio(
         # Step 1: STT
         logger.info("Step 1/3: Transcribing with Whisper...")
         src_code = LANG_MAP.get(source_lang.lower(), "en")
-        
-        # Better transcription parameters for accuracy
         result = model_manager.whisper_model.transcribe(
-            temp_input_path, 
-            language=src_code, 
-            task="transcribe", 
-            fp16=False,
-            beam_size=5,  # Better accuracy with beam search
-            best_of=5,    # Consider multiple candidates
-            temperature=0.0  # Deterministic output
+            temp_input_path, language=src_code, task="transcribe", fp16=False
         )
         transcribed = result["text"].strip()
         logger.info(f"📝 Transcribed: {transcribed}")

@@ -1,5 +1,5 @@
 @echo off
-REM L&T Audio Translator - Quick Start Script for Windows
+REM Audio Translator - Quick Start Script for Windows
 REM This script starts both backend and frontend
 
 echo ================================================
