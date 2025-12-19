@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  # Backend API Server
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: lt-translator-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      # Persist downloaded models (prevents re-downloading on container restart)
+      - ai-models:/app/models
+      - piper-data:/app/piper
+      - glossary-data:/app/resources
+    environment:
+      - PYTHONUNBUFFERED=1
+      - CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-}  # Optional GPU support
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    # Uncomment for GPU support (requires nvidia-docker)
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+  # Frontend Web UI
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: lt-translator-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+    restart: unless-stopped
+
+volumes:
+  # Named volumes for persistent data
+  ai-models:
+    driver: local
+  piper-data:
+    driver: local
+  glossary-data:
+    driver: local
+
+networks:
+  default:
+    name: lt-translator-network
