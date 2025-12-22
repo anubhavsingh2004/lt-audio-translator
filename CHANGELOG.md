@@ -31,6 +31,15 @@
 - **Secure offline system** subtitle
 - Streamlined interface focused on military use case
 
+#### 4. Docker Deployment Support ✅
+- **Complete Docker setup** with multi-stage builds
+- **docker-compose.yml** for one-command deployment
+- **Persistent volumes** for AI models (no re-download on restart)
+- **Production-ready** nginx configuration for frontend
+- **Health checks** and auto-restart policies
+- **GPU support** (optional, with nvidia-docker)
+- **Comprehensive Docker documentation** (DOCKER.md)
+
 ---
 
 ### 📁 Files Added
@@ -41,6 +50,14 @@
 | `backend/resources/defense_glossary.json` | Military terminology database (50+ entries) |
 | `backend/tools/generate_defense_glossary.py` | Tool to generate large-scale glossaries |
 | `backend/tools/validate_defense_glossary.py` | Tool to validate glossary structure |
+| `backend/Dockerfile` | Backend containerization |
+| `backend/.dockerignore` | Docker build exclusions |
+| `frontend/Dockerfile` | Frontend containerization with multi-stage build |
+| `frontend/nginx.conf` | Production web server configuration |
+| `frontend/.dockerignore` | Docker build exclusions |
+| `docker-compose.yml` | Orchestration for full-stack deployment |
+| `.env.example` | Environment configuration template |
+| `DOCKER.md` | Complete Docker deployment guide |
 
 ### 📝 Files Modified
 

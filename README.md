@@ -114,9 +114,36 @@ Install these on the target machine:
 
 ---
 
-## ⚙️ Setup & Run (Quick Start)
+## ⚙️ Setup & Run
 
-### 1. Clone Repository
+You can run this application in two ways:
+
+### 🐳 **Option 1: Docker (Recommended - Easiest)**
+
+**One-command deployment:**
+
+```bash
+# Clone and run
+git clone https://github.com/YOUR_USERNAME/lt-audio-translator.git
+cd lt-audio-translator
+docker-compose up -d
+```
+
+**That's it!** Application will be available at:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:8000
+
+**📖 Full Docker guide:** See [DOCKER.md](DOCKER.md) for:
+- GPU acceleration
+- Configuration options
+- Troubleshooting
+- Production deployment
+
+---
+
+### 💻 **Option 2: Manual Setup (Traditional)**
+
+#### 1. Clone Repository
 
 ```bash
 cd D:\
@@ -337,6 +364,10 @@ lt-audio-translator/
 ---
 
 ## 🚀 Advanced Configuration
+
+### Docker Deployment
+
+See **[DOCKER.md](DOCKER.md)** for complete containerized deployment guide.
 
 ### Change Whisper Model
 
